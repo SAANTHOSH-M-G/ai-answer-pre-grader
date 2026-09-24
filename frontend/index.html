@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Exam Answer Pre-Grader</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div>
+        <h1>AI Exam Answer Pre-Grader</h1>
+        <p>Handwriting → OCR → AI Rubric Evaluation → Teacher Review</p>
+    </div>
+
+    <div class="status">
+        <span class="status-dot"></span>
+        AI System Ready
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- STEP 1: EXAM SETUP -->
+    <section class="card">
+
+        <div class="section-title">
+            <div>
+                <span class="step-number">1</span>
+                <div>
+                    <h2>Exam Setup</h2>
+                    <p>Enter the questions, answer keys and marking rubrics.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript creates Q1 here automatically -->
+        <div id="questions-container"></div>
+
+        <button id="add-question-btn" class="secondary-btn">
+            + Add Question
+        </button>
+
+    </section>
+
+
+    <!-- STEP 2: ANSWER SHEET -->
+    <section class="card">
+
+        <div class="section-title">
+            <div>
+                <span class="step-number">2</span>
+                <div>
+                    <h2>Student Answer Sheet</h2>
+                    <p>Upload the handwritten answer sheet.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="upload-area" id="upload-area">
+
+            <div class="upload-icon">📄</div>
+
+            <h3>Upload Handwritten Answer Sheet</h3>
+
+            <p>JPG, JPEG or PNG</p>
+
+            <input
+                type="file"
+                id="answer-sheet"
+                accept=".jpg,.jpeg,.png"
+                hidden
+            >
+
+            <button class="primary-btn" id="choose-file-btn">
+                Choose Answer Sheet
+            </button>
+
+            <p id="file-name" class="file-name"></p>
+
+        </div>
+
+        <button id="process-btn" class="process-btn">
+            🔎 Run OCR + AI Structuring
+        </button>
+
+        <p style="margin-top:12px;text-align:center;color:#64748b;font-size:13px;">
+            Backend: http://127.0.0.1:5000
+        </p>
+
+        <div id="processing" class="processing hidden">
+            <div class="loader"></div>
+            <p>Processing handwritten answer sheet...</p>
+            <small>OCR and AI structuring may take some time.</small>
+        </div>
+
+    </section>
+
+
+    <!-- STEP 3: OCR -->
+    <section id="ocr-section" class="card hidden">
+
+        <div class="section-title">
+            <div>
+                <span class="step-number">3</span>
+                <div>
+                    <h2>OCR & AI Structuring</h2>
+                    <p>Review the text extracted from the answer sheet.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="metrics">
+
+            <div class="metric">
+                <span>OCR Confidence</span>
+                <strong id="ocr-confidence">--</strong>
+            </div>
+
+            <div class="metric">
+                <span>Parser Confidence</span>
+                <strong id="parser-confidence">--</strong>
+            </div>
+
+        </div>
+
+        <div class="result-block">
+            <h3>Raw OCR Text</h3>
+            <pre id="ocr-text"></pre>
+        </div>
+
+        <div class="result-block">
+            <h3>Structured Answers</h3>
+            <div id="structured-answers"></div>
+        </div>
+
+        <button id="evaluate-btn" class="process-btn">
+            🚀 Evaluate Answers Using Rubric
+        </button>
+
+    </section>
+
+
+    <!-- STEP 4: RESULTS -->
+    <section id="results-section" class="card hidden">
+
+        <div class="section-title">
+            <div>
+                <span class="step-number">4</span>
+                <div>
+                    <h2>AI Exam Results</h2>
+                    <p>AI suggestions for teacher review.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-grid">
+
+            <div class="summary-box">
+                <span>AI Total</span>
+                <strong id="ai-total">--</strong>
+            </div>
+
+            <div class="summary-box">
+                <span>Percentage</span>
+                <strong id="percentage">--</strong>
+            </div>
+
+            <div class="summary-box">
+                <span>Manual Review</span>
+                <strong id="review-count">--</strong>
+            </div>
+
+        </div>
+
+        <div id="question-results"></div>
+
+
+        <!-- TEACHER FINAL REVIEW -->
+        <div class="teacher-review">
+
+            <h3>👨‍🏫 Teacher Final Review</h3>
+
+            <p>
+                AI suggestions are not final marks.
+                The teacher has the final authority.
+            </p>
+
+            <label for="teacher-score">Final Score</label>
+
+            <input
+                type="number"
+                id="teacher-score"
+                min="0"
+                step="0.5"
+            >
+
+            <label for="teacher-comment">Teacher Comment</label>
+
+            <textarea
+                id="teacher-comment"
+                rows="4"
+                placeholder="Enter teacher comment..."
+            ></textarea>
+
+            <button id="finalize-btn" class="final-btn">
+                ✓ Finalize Result
+            </button>
+
+        </div>
+
+
+        <!-- FINAL RESULT -->
+        <div id="final-result" class="final-result hidden">
+
+            <h2>Final Exam Result</h2>
+
+            <div class="final-score" id="final-score"></div>
+
+            <p id="final-comment"></p>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>
+        AI-assisted pre-grading system •
+        Teacher retains final grading authority
+    </p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

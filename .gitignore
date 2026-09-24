@@ -1,0 +1,27 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Environment / secrets
+.env
+*.env
+
+# Uploaded student files / generated data
+uploads/
+*.jpg
+*.jpeg
+*.png
+*.webp
+
+# Editors
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Old backup frontend
+frontend 2/
